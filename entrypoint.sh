@@ -34,7 +34,8 @@ for k in $(jq '.vars | keys | .[]' variables.json); do
     escaped_value=$(echo $raw_value | sed -e 's/[]\/$*.^[]/\\&/g');
     sensitive=$(echo $value | jq '.sensitive')
 
-    printf "\nCreate variable %s" "$key"
+    printf "\nDelete variable %s" "$key"
+    printf "\nVinay"
     curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" "https://$TF_HOST/api/v2/workspaces/$wid/vars" > vars.json
     id=$(cat vars.json | jq -r --arg key "$key" '.data[] | select(.attributes.key == $key) | .id')
     curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" --request DELETE "https://$TF_HOST/api/v2/workspaces/$wid/vars/$id"
@@ -51,6 +52,7 @@ for k in $(jq '.vars | keys | .[]' variables.json); do
     sensitive=$(echo $value | jq '.sensitive')
 
     printf "\nCreate variable %s" "$key"
+    
     sed -e "s/T_KEY/$key/" -e "s/my-hcl/false/" -e "s/T_VALUE/$escaped_value/" -e "s/T_SECURED/$sensitive/" -e "s/T_WSID/$wid/" < /tmp/variable.payload  > paylaod.json
     curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" --request POST --data @paylaod.json "https://$TF_HOST/api/v2/workspaces/$wid/vars" > log.txt
 done
