@@ -14,16 +14,16 @@ curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: appli
 #Retreive Workspace ID
 wid=$(curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" "https://$TF_HOST/api/v2/organizations/$TF_ORGA/workspaces/$TF_WS" | jq -r .data.id)
 
-#Clean existing variables
-printf "\nClear existing variables"
-curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" "https://$TF_HOST/api/v2/workspaces/$wid/vars" > vars.json
-x=$(cat vars.json | jq -r ".data[].id" | wc -l | awk '{print $1}')
-i=0
-while [ $i -lt $x ]
-do
-  curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" --request DELETE "https://$TF_HOST/api/v2/workspaces/$wid/vars/$(cat vars.json | jq -r ".data[$i].id")" > logs.txt
-  i=`expr $i + 1`
-done
+# #Clean existing variables
+# printf "\nClear existing variables"
+# curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" "https://$TF_HOST/api/v2/workspaces/$wid/vars" > vars.json
+# x=$(cat vars.json | jq -r ".data[].id" | wc -l | awk '{print $1}')
+# i=0
+# while [ $i -lt $x ]
+# do
+#   curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" --request DELETE "https://$TF_HOST/api/v2/workspaces/$wid/vars/$(cat vars.json | jq -r ".data[$i].id")" > logs.txt
+#   i=`expr $i + 1`
+# done
 
 #Create variables
 for k in $(jq '.vars | keys | .[]' variables.json); do
