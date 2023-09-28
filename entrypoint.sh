@@ -45,13 +45,13 @@ for k in $(jq '.vars | keys | .[]' variables.json); do
     id=""
 
     # Iterate through the array and find the matching key
-    for data in "${data_array[@]}"; do
+    while IFS= read -r data; do
         data_key=$(jq -r '.attributes.key' <<< "$data")
         if [[ "$data_key" == "$key" ]]; then
             id=$(jq -r '.id' <<< "$data")
             break  # Exit the loop when a match is found
         fi
-    done
+    done <<< "$(jq -c '.data[]' <<< "$json_data")"
 
     printf "\nNewID variable %s" "$id"
     printf "\nID of the variable %s" "$id"
