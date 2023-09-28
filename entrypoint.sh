@@ -36,7 +36,6 @@ for k in $(jq '.vars | keys | .[]' variables.json); do
     sensitive=$(echo $value | jq '.sensitive')
 
     printf "\nDelete variable %s" "$key"
-    cat fullvars.json
     echo "key: $key"
     id=$(cat fullvars.json | jq -r --arg key "$key" '.data[] | select(.attributes.key == $key) | .id')
     printf "\nID of the variable %s" "$id"
