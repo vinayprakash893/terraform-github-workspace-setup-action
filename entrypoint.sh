@@ -36,7 +36,7 @@ for k in $(jq '.vars | keys | .[]' variables.json); do
 
     printf "\nCreate variable %s" "$key"
     curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" "https://$TF_HOST/api/v2/workspaces/$wid/vars" > vars.json
-    id=$(cat vars.json | jq -r '.data[] | select(.attributes.key == $key) | .id')
+    id=$(cat vars.json | jq -r --arg key "$key" '.data[] | select(.attributes.key == $key) | .id')
     curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" --request DELETE "https://$TF_HOST/api/v2/workspaces/$wid/vars/$id"
 done
 
