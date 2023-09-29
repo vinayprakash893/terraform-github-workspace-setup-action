@@ -37,7 +37,7 @@ for k in $(jq '.vars | keys | .[]' variables.json); do
 
     printf "\nDelete variable %s" "$key"
     # id=$(cat fullvars.json | jq -r --arg key "$key" '.data[] | select(.attributes.key == $key) | .id')
-    id=$(cat fullvars.json | jq -r --arg key "$key" '.data[] | select(.attributes.key == "region")' )
+    id=$(cat fullvars.json | jq -r --arg key "$key" '.data[] | select(.attributes.key == "region") | .id' )
     printf "\nNewID variable %s" "$id"
     printf "\n"
     #curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" --request DELETE "https://$TF_HOST/api/v2/workspaces/$wid/vars/$id"
