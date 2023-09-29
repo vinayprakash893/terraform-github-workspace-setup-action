@@ -1,0 +1,115 @@
+{
+    "data": [
+        {
+            "id": "var-H3GaEpyKqUSSEhFC",
+            "type": "vars",
+            "attributes": {
+                "key": "region",
+                "value": "eu-west-4",
+                "sensitive": false,
+                "category": "terraform",
+                "hcl": false,
+                "created-at": "2023-09-28T16:13:30.822Z",
+                "description": null,
+                "version-id": "5a686b7eaf56fa90f1e9fd328d5cb761d96db6095c71d34ebee4c74986d45d24"
+            },
+            "relationships": {
+                "configurable": {
+                    "data": {
+                        "id": "ws-3ubAddLg1wkFe92k",
+                        "type": "workspaces"
+                    },
+                    "links": {
+                        "related": "/api/v2/organizations/Cloudtech/workspaces/cloud_user_p_99650270"
+                    }
+                },
+                "workspace": {
+                    "data": {
+                        "id": "ws-3ubAddLg1wkFe92k",
+                        "type": "workspaces"
+                    },
+                    "links": {
+                        "related": "/api/v2/organizations/Cloudtech/workspaces/cloud_user_p_99650270"
+                    }
+                }
+            },
+            "links": {
+                "self": "/api/v2/workspaces/ws-3ubAddLg1wkFe92k/vars/var-H3GaEpyKqUSSEhFC"
+            }
+        },
+        {
+            "id": "var-WKoL51EYTgC8uUuR",
+            "type": "vars",
+            "attributes": {
+                "key": "access_key_id",
+                "value": null,
+                "sensitive": true,
+                "category": "terraform",
+                "hcl": false,
+                "created-at": "2023-09-28T16:13:31.248Z",
+                "description": null,
+                "version-id": "4473e811928b9677433132b439aec1246e81566e04533fb1e91ada4ae81e742e"
+            },
+            "relationships": {
+                "configurable": {
+                    "data": {
+                        "id": "ws-3ubAddLg1wkFe92k",
+                        "type": "workspaces"
+                    },
+                    "links": {
+                        "related": "/api/v2/organizations/Cloudtech/workspaces/cloud_user_p_99650270"
+                    }
+                },
+                "workspace": {
+                    "data": {
+                        "id": "ws-3ubAddLg1wkFe92k",
+                        "type": "workspaces"
+                    },
+                    "links": {
+                        "related": "/api/v2/organizations/Cloudtech/workspaces/cloud_user_p_99650270"
+                    }
+                }
+            },
+            "links": {
+                "self": "/api/v2/workspaces/ws-3ubAddLg1wkFe92k/vars/var-WKoL51EYTgC8uUuR"
+            }
+        },
+        {
+            "id": "var-jhH6UsYiXzQDeJfM",
+            "type": "vars",
+            "attributes": {
+                "key": "access_key_id_2",
+                "value": "key11",
+                "sensitive": false,
+                "category": "terraform",
+                "hcl": false,
+                "created-at": "2023-09-28T16:13:31.696Z",
+                "description": null,
+                "version-id": "7ca554a077c30d8b9774653533d27db1e77202799f883b5f75725d43af77a4e3"
+            },
+            "relationships": {
+                "configurable": {
+                    "data": {
+                        "id": "ws-3ubAddLg1wkFe92k",
+                        "type": "workspaces"
+                    },
+                    "links": {
+                        "related": "/api/v2/organizations/Cloudtech/workspaces/cloud_user_p_99650270"
+                    }
+                },
+                "workspace": {
+                    "data": {
+                        "id": "ws-3ubAddLg1wkFe92k",
+                        "type": "workspaces"
+                    },
+                    "links": {
+                        "related": "/api/v2/organizations/Cloudtech/workspaces/cloud_user_p_99650270"
+                    }
+                }
+            },
+            "links": {
+                "self": "/api/v2/workspaces/ws-3ubAddLg1wkFe92k/vars/var-jhH6UsYiXzQDeJfM"
+            }
+        }
+    ]
+}
