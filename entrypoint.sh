@@ -36,25 +36,9 @@ for k in $(jq '.vars | keys | .[]' variables.json); do
     sensitive=$(echo $value | jq '.sensitive')
 
     printf "\nDelete variable %s" "$key"
-    echo "key: $key"
-    json_data=$(cat fullvars.json)
-
-    data_array=($(jq -c '.data[]' <<< "$json_data"))
-
-    # Initialize the ID variable
-    id=""
-
-    # Iterate through the array and find the matching key
-    while IFS= read -r data; do
-        data_key=$(jq -r '.attributes.key' <<< "$data")
-        if [[ "$data_key" == "$key" ]]; then
-            id=$(jq -r '.id' <<< "$data")
-            break  # Exit the loop when a match is found
-        fi
-    done <<< "$(jq -c '.data[]' <<< "$json_data")"
-
+    # id=$(cat vars.json | jq -r --arg key "$key" '.data[] | select(.attributes.key == $key) | .id')
+    id=$(cat vars.json | jq -r --arg key "$key" '.data[]' )
     printf "\nNewID variable %s" "$id"
-    printf "\nID of the variable %s" "$id"
     printf "\n"
     #curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" --request DELETE "https://$TF_HOST/api/v2/workspaces/$wid/vars/$id"
     printf "\nDeleted variable %s" "$key"
