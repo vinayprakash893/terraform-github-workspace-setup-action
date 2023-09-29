@@ -36,11 +36,9 @@ for k in $(jq '.vars | keys | .[]' variables.json); do
     sensitive=$(echo $value | jq '.sensitive')
 
     printf "\nDeleting variable %s" "$key"
-    keytofind=$key
-    # id=$(cat fullvars.json | jq -r --arg key "$key" '.data[] | select(.attributes.key == $key) | .id')
     id=$(cat fullvars.json | jq -r --arg key "$key" '.data[] | select(.attributes.key == '$key') | .id' )
     printf "\nVariable ID %s" "$id"
-    #curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" --request DELETE "https://$TF_HOST/api/v2/workspaces/$wid/vars/$id"
+    curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" --request DELETE "https://$TF_HOST/api/v2/workspaces/$wid/vars/$id"
     printf "\nDeleted variable %s" "$key"
     printf "\n"
 done
