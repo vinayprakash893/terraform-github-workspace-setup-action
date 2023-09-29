@@ -35,13 +35,14 @@ for k in $(jq '.vars | keys | .[]' variables.json); do
     escaped_value=$(echo $raw_value | sed -e 's/[]\/$*.^[]/\\&/g');
     sensitive=$(echo $value | jq '.sensitive')
 
-    printf "\nDelete variable %s" "$key"
+    printf "\nDeleting variable %s" "$key"
+    keytofind=$key
     # id=$(cat fullvars.json | jq -r --arg key "$key" '.data[] | select(.attributes.key == $key) | .id')
-    id=$(cat fullvars.json | jq -r --arg key "$key" '.data[] | select(.attributes.key == "region") | .id' )
-    printf "\nNewID variable %s" "$id"
-    printf "\n"
+    id=$(cat fullvars.json | jq -r --arg key "$key" '.data[] | select(.attributes.key == '$keytofind') | .id' )
+    printf "\nVariable ID %s" "$id"
     #curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" --request DELETE "https://$TF_HOST/api/v2/workspaces/$wid/vars/$id"
     printf "\nDeleted variable %s" "$key"
+    printf "\n"
 done
 
 #Create variables
