@@ -22,7 +22,7 @@ TF_VARSET = 'varset-CfEeJ5NPqiebXaCg'
 
 # Create workspace
 print("\nCreate or get workspace:", TF_WS)
-with open('/tmp/workspace.payload') as f:
+with open('/app/workspace.payload') as f:
     workspace_payload = f.read().replace('T_WS', TF_WS).replace('T_PRJ', TF_PRJ)
 with open('workspace.json', 'w') as f:
     f.write(workspace_payload)
@@ -39,7 +39,7 @@ workspace_id_response = requests.get(f"https://{TF_HOST}/api/v2/organizations/{T
 wid = workspace_id_response.json()['data']['id']
 
 # Map Variable Set to workspace
-with open('/tmp/workspaceid.payload') as f:
+with open('/app/workspaceid.payload') as f:
     workspaceid_payload = f.read().replace('T_WS_ID', wid)
 workspaceid_response = requests.post(f"https://{TF_HOST}/api/v2/varsets/{TF_VARSET}/relationships/workspaces",
                                      headers={"Authorization": f"Bearer {TF_TOKEN}", "Content-Type": "application/vnd.api+json"},
