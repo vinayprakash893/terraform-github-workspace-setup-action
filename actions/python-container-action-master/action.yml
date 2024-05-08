@@ -4,7 +4,6 @@ author: "Jacob Tomlinson"
 inputs:
   myInput:
     description: "Input to use"
-    default: "world"
 outputs:
   myOutput:
     description: "Output from the action"
