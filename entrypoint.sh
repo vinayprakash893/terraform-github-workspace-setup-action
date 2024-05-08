@@ -6,6 +6,7 @@ TF_TOKEN=$(echo $3)
 echo "{ \"vars\":[ $4 ]}" > variables.json
 TF_HOST=$(echo $5)
 TF_PRJ=$(echo $6)
+TF_VARSET=$(echo $7)
 
 #Create workspace
 printf "\nCreate or get workspace:%s" "$TF_WS"
@@ -18,6 +19,13 @@ curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: appli
 
 #Retreive Workspace ID
 wid=$(curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" "https://$TF_HOST/api/v2/organizations/$TF_ORGA/workspaces/$TF_WS" | jq -r .data.id)
+
+
+#Map Varaible Set to  workspace
+sed "s/T_WS_ID/$wid/" < /tmp/workspaceid.payload > workspaceid.json
+cat workspaceid.json
+curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" --request POST --data @workspaceid.json "https://$TF_HOST/api/v2/varsets/$TF_VARSET/relationships/workspaces" >> logs.txt
+
 
 # #Clean existing all variables
 # printf "\nClear existing variables"
