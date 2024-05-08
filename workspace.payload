@@ -1,6 +1,5 @@
 {
-  "data":
-  {
+  "data": {
     "attributes": {
       "name":"T_WS",
       "auto-apply":"false",
@@ -9,5 +8,13 @@
       "source-url":"https://github.com/recarnot/terraform-github-cicd-bootstrap"
     },
     "type":"workspaces"
+  },
+  "relationships": {
+    "project": {
+      "data": {
+        "type": "projects",
+        "id": "prj-e9V6rDjNezrrq1Em"
+      }
+    }
   }
 }

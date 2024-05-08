@@ -9,6 +9,7 @@ TF_HOST=$(echo $5)
 #Create workspace
 printf "\nCreate or get workspace:%s" "$TF_WS"
 sed "s/T_WS/$TF_WS/" < /tmp/workspace.payload > workspace.json
+cat workspace.json
 curl -s --header "Authorization: Bearer $TF_TOKEN" --header "Content-Type: application/vnd.api+json" --request POST --data @workspace.json "https://$TF_HOST/api/v2/organizations/$TF_ORGA/workspaces" > logs.txt
 
 #Retreive Workspace ID
