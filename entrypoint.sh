@@ -5,6 +5,7 @@ TF_WS=$(echo $2)
 TF_TOKEN=$(echo $3)
 echo "{ \"vars\":[ $4 ]}" > variables.json
 TF_HOST=$(echo $5)
+TF_PRJ=$(echo $6)
 
 #Create workspace
 printf "\nCreate or get workspace:%s" "$TF_WS"

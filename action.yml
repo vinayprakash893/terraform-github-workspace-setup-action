@@ -9,6 +9,10 @@ inputs:
   organization:
     description: 'Terraform Organization name'
     required: true
+  project:
+    description: 'Terraform Project name'
+    required: false
+    default: ""
   workspace:
     description: 'Terraform Workspace name'
     required: true
@@ -31,6 +35,7 @@ runs:
     - ${{ inputs.token }}
     - ${{ inputs.vars }}
     - ${{ inputs.hostname }}
+    - ${{ inputs.project }}
 branding:
   icon: 'check-square'
   color: 'blue'
