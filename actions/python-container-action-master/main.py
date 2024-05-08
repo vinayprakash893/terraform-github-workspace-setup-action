@@ -16,9 +16,9 @@ TF_HOST = "app.terraform.io"
 TF_PRJ = 'prj-e9V6rDjNezrrq1Em'
 TF_VARSET = 'varset-CfEeJ5NPqiebXaCg'
 
-# Write variables to a JSON file
-with open('variables.json', 'w') as f:
-    json.dump({"vars": json.loads(os.getenv("VAR_JSON"))}, f)
+# # Write variables to a JSON file
+# with open('variables.json', 'w') as f:
+#     json.dump({"vars": json.loads(os.getenv("VAR_JSON"))}, f)
 
 # Create workspace
 print("\nCreate or get workspace:", TF_WS)
@@ -51,7 +51,7 @@ with open('logs.txt', 'ab') as f:
 fullvars_response = requests.get(f"https://{TF_HOST}/api/v2/workspaces/{wid}/vars",
                                  headers={"Authorization": f"Bearer {TF_TOKEN}", "Content-Type": "application/vnd.api+json"})
 fullvars_json = fullvars_response.json()
-variables_json = json.loads(os.getenv("VAR_JSON"))
+# variables_json = json.loads(os.getenv("VAR_JSON"))
 for var in variables_json["vars"]:
     key = var["key"]
     id = next((item['id'] for item in fullvars_json['data'] if item['attributes']['key'] == key), None)
