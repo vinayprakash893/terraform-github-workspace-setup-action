@@ -47,50 +47,50 @@ workspaceid_response = requests.post(f"https://{TF_HOST}/api/v2/varsets/{TF_VARS
 with open('logs.txt', 'ab') as f:
     f.write(workspaceid_response.content)
 
-# Clean only replacing variables
-fullvars_response = requests.get(f"https://{TF_HOST}/api/v2/workspaces/{wid}/vars",
-                                 headers={"Authorization": f"Bearer {TF_TOKEN}", "Content-Type": "application/vnd.api+json"})
-fullvars_json = fullvars_response.json()
-# variables_json = json.loads(os.getenv("VAR_JSON"))
-for var in variables_json["vars"]:
-    key = var["key"]
-    id = next((item['id'] for item in fullvars_json['data'] if item['attributes']['key'] == key), None)
-    if id:
-        print(f"\nDeleting variable {key}")
-        delete_response = requests.delete(f"https://{TF_HOST}/api/v2/workspaces/{wid}/vars/{id}",
-                                          headers={"Authorization": f"Bearer {TF_TOKEN}", "Content-Type": "application/vnd.api+json"})
-        print(f"\nVariable ID {id}")
+# # Clean only replacing variables
+# fullvars_response = requests.get(f"https://{TF_HOST}/api/v2/workspaces/{wid}/vars",
+#                                  headers={"Authorization": f"Bearer {TF_TOKEN}", "Content-Type": "application/vnd.api+json"})
+# fullvars_json = fullvars_response.json()
+# # variables_json = json.loads(os.getenv("VAR_JSON"))
+# for var in variables_json["vars"]:
+#     key = var["key"]
+#     id = next((item['id'] for item in fullvars_json['data'] if item['attributes']['key'] == key), None)
+#     if id:
+#         print(f"\nDeleting variable {key}")
+#         delete_response = requests.delete(f"https://{TF_HOST}/api/v2/workspaces/{wid}/vars/{id}",
+#                                           headers={"Authorization": f"Bearer {TF_TOKEN}", "Content-Type": "application/vnd.api+json"})
+#         print(f"\nVariable ID {id}")
 
-# Create variables
-for var in variables_json["vars"]:
-    key = var["key"]
-    value = var["value"]
-    sensitive = var.get("sensitive", False)
-    print(f"\nCreate variable {key}")
-    payload = {
-        "data": {
-            "type": "vars",
-            "attributes": {
-                "key": key,
-                "value": value,
-                "sensitive": sensitive,
-                "hcl": False
-            },
-            "relationships": {
-                "workspace": {
-                    "data": {
-                        "id": wid,
-                        "type": "workspaces"
-                    }
-                }
-            }
-        }
-    }
-    create_response = requests.post(f"https://{TF_HOST}/api/v2/workspaces/{wid}/vars",
-                                    headers={"Authorization": f"Bearer {TF_TOKEN}", "Content-Type": "application/vnd.api+json"},
-                                    json=payload)
-    with open('log.txt', 'ab') as f:
-        f.write(create_response.content)
+# # Create variables
+# for var in variables_json["vars"]:
+#     key = var["key"]
+#     value = var["value"]
+#     sensitive = var.get("sensitive", False)
+#     print(f"\nCreate variable {key}")
+#     payload = {
+#         "data": {
+#             "type": "vars",
+#             "attributes": {
+#                 "key": key,
+#                 "value": value,
+#                 "sensitive": sensitive,
+#                 "hcl": False
+#             },
+#             "relationships": {
+#                 "workspace": {
+#                     "data": {
+#                         "id": wid,
+#                         "type": "workspaces"
+#                     }
+#                 }
+#             }
+#         }
+#     }
+#     create_response = requests.post(f"https://{TF_HOST}/api/v2/workspaces/{wid}/vars",
+#                                     headers={"Authorization": f"Bearer {TF_TOKEN}", "Content-Type": "application/vnd.api+json"},
+#                                     json=payload)
+#     with open('log.txt', 'ab') as f:
+#         f.write(create_response.content)
 
 print("\n\n")
 print("::set-output name=workspace_id::", wid)
