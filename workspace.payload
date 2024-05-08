@@ -1,19 +1,19 @@
 {
   "data": {
+    "type": "workspaces",
     "attributes": {
-      "name":"T_WS",
+      "name": "T_WS",
       "auto-apply":"false",
       "description":"Created by Github Actions for Terraform project",
       "source-name":"GitHub CI/CD for Terraform",
       "source-url":"https://github.com/recarnot/terraform-github-cicd-bootstrap"
     },
-    "type":"workspaces"
-  },
-  "relationships": {
-    "project": {
-      "data": {
-        "type": "projects",
-        "id": "prj-e9V6rDjNezrrq1Em"
+    "relationships": {
+      "project": {
+        "data": {
+          "type": "projects",
+          "id": "prj-e9V6rDjNezrrq1Em"
+        }
       }
     }
   }
