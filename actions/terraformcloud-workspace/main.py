@@ -16,6 +16,7 @@ class Context:
         WORKSPACE_NAME = self._environ.get('INPUT_WORKSPACE_NAME')
         PROJECT_NAME = self._environ.get('INPUT_PROJECT_NAME')
         tfc = TFC(API_TOKEN)
+        tfc.set_org(ORG_NAME)
         ws_api = tfc.workspaces
         ws_payload = {
             "data": {
