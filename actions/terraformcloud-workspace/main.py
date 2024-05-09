@@ -37,7 +37,7 @@ class Context:
             }
         }
         # List existing workspaces
-        existing_workspaces = ws_api.list()
+        existing_workspaces = ws_api.list(page=None, page_size=None, include=None, search=None, filters='prj-e9V6rDjNezrrq1Em')
         print(existing_workspaces)
 
         # Extract workspace names
