@@ -38,6 +38,7 @@ class Context:
         }
         # List existing workspaces
         existing_workspaces = ws_api.list()
+        print(existing_workspaces)
 
         # Extract workspace names
         existing_workspace_names = [ws.name for ws in existing_workspaces]
