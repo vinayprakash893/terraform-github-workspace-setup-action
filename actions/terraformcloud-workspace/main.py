@@ -37,16 +37,16 @@ class Context:
             }
         }
         # List existing workspaces
-        existing_workspaces = ws_api.list(page=None, page_size=None, include=None, search=None, filters='prj-e9V6rDjNezrrq1Em')
-        print(existing_workspaces)
+        existing_workspaces = ws_api.list(page=None, page_size=None, include=None, search=None, filters=None)
+        workspace_exists = any(ws["attributes"]["name"] == WORKSPACE_NAME for ws in existing_workspaces["data"])
+        print(workspace_exists)
 
         # Extract workspace names
-        existing_workspace_names = [ws.name for ws in existing_workspaces]
-
-        if WORKSPACE_NAME in existing_workspace_names:
-            logging.error(f"Workspace {WORKSPACE_NAME} already exists.")
-            print(f"Workspace {WORKSPACE_NAME} already exists.")
+        if workspace_exists:
+            logging.error(f"Workspace '{WORKSPACE_NAME}' already exists.")
+            print(f"Workspace '{WORKSPACE_NAME}' already exists.")
             return
+
         ws_api.create(ws_payload)
         logging.info(f"Workspace {WORKSPACE_NAME} has been created.")
         print(f"Workspace {WORKSPACE_NAME} has been created.")
