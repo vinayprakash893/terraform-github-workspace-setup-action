@@ -35,5 +35,5 @@ class Context:
                 }
             }
         }
-        ws_api.create(ORG_NAME, ws_payload)
+        ws_api.create(ws_payload)
         logging.info(f"Workspace {WORKSPACE_NAME} has been created.")
