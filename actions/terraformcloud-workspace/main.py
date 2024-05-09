@@ -53,6 +53,7 @@ class Context:
         print(f"WorkspaceID is {workspace_id} .")
 
         # Map Variable Set to Workspace
+        vs_api = tfc.var_sets
         print( "mapping Variable set")
         ws_payload_id = {
             "data": [
@@ -62,4 +63,4 @@ class Context:
                 }
             ]
         }
-        ws_api.apply_varset_to_workspace(VARIABLESET_NAME, ws_payload_id)
+        vs_api.apply_varset_to_workspace(VARIABLESET_NAME, ws_payload_id)
