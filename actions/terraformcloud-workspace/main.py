@@ -19,48 +19,53 @@ class Context:
         tfc = TFC(API_TOKEN)
         tfc.set_org(ORG_NAME)
         ws_api = tfc.workspaces
-        ws_payload = {
-            "data": {
-                "type": "workspaces",
-                "attributes": {
-                    "name": WORKSPACE_NAME,
-                    "auto-apply":"false",
-                    "description":"Created by Github Actions for Terraform project"
-                },
-                "relationships": {
-                "project": {
-                    "data": {
-                    "type": "projects",
-                    "id": PROJECT_NAME
-                    }
-                }
-                }
-            }
-        }
-        
+
         # List existing workspaces
         existing_workspaces = ws_api.list(page=None, page_size=None, include=None, search=None, filters=None)
         workspace_exists = any(ws["attributes"]["name"] == WORKSPACE_NAME for ws in existing_workspaces["data"])
         if workspace_exists:
             logging.error(f"Workspace '{WORKSPACE_NAME}' already exists.")
             print(f"Workspace '{WORKSPACE_NAME}' already exists.")
-            return
-        # Create Workspace
-        new_workspace = ws_api.create(ws_payload)
-        workspace_id = new_workspace["data"]["id"]
-        logging.info(f"Workspace {WORKSPACE_NAME} has been created.")
-        print(f"Workspace {WORKSPACE_NAME} has been created.")
-        print(f"WorkspaceID is {workspace_id} .")
-
-        # Map Variable Set to Workspace
-        vs_api = tfc.var_sets
-        print( "mapping Variable set")
-        ws_payload_id = {
-            "data": [
-                {
-                "type": "workspaces",
-                "id": workspace_id
+            
+        else:
+            # Create Workspace
+            ws_payload = {
+                "data": {
+                    "type": "workspaces",
+                    "attributes": {
+                        "name": WORKSPACE_NAME,
+                        "auto-apply":"false",
+                        "description":"Created by Github Actions for Terraform project"
+                    },
+                    "relationships": {
+                        "project": {
+                            "data": {
+                                "type": "projects",
+                                "id": PROJECT_NAME
+                            }
+                        }
+                    }
                 }
-            ]
-        }
-        vs_api.apply_varset_to_workspace(VARIABLESET_NAME, ws_payload_id)
+            }
+            new_workspace = ws_api.create(ws_payload)
+            workspace_id = new_workspace["data"]["id"]
+            logging.info(f"Workspace {WORKSPACE_NAME} has been created.")
+            print(f"Workspace {WORKSPACE_NAME} has been created.")
+            print(f"WorkspaceID is {workspace_id} .")
+
+            # Map Variable Set to Workspace
+            vs_api = tfc.var_sets
+            print( "mapping Variable set")
+            ws_payload_id = {
+                "data": [
+                    {
+                    "type": "workspaces",
+                    "id": workspace_id
+                    }
+                ]
+            }
+            list_varsets = vs_api.list_for_org()
+            print(list_varsets)
+            vs_api.apply_varset_to_workspace(VARIABLESET_NAME, ws_payload_id)
+            print(f"Variable Set mapping completed {VARIABLESET_NAME} for workspace {WORKSPACE_NAME} .")
+
