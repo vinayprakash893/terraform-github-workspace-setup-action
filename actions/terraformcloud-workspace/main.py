@@ -36,5 +36,9 @@ class Context:
                 }
             }
         }
+        ws_api.list(page=None, page_size=None, include=None, search=None, filters=None)
+        print(ws_api.list)
+        print("---vny---")
         ws_api.create(ws_payload)
         logging.info(f"Workspace {WORKSPACE_NAME} has been created.")
+        print(f"Workspace {WORKSPACE_NAME} has been created.")
