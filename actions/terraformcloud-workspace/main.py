@@ -50,6 +50,7 @@ class Context:
         workspace_id = new_workspace["data"]["id"]
         logging.info(f"Workspace {WORKSPACE_NAME} has been created.")
         print(f"Workspace {WORKSPACE_NAME} has been created.")
+        print(f"WorkspaceID is {workspace_id} .")
 
         # Map Variable Set to Workspace
         print( "mapping Variable set")
