@@ -29,8 +29,7 @@ class Context:
                 break
         project_exists = any(prj["attributes"]["name"] == PROJECT_NAME for prj in existing_projects["data"])
         if project_exists:
-            logging.error(f"Project '{PROJECT_NAME}' already exists.")
-            print(f"Project '{PROJECT_NAME}' already exists.")
+            print(f"Project '{PROJECT_NAME}' exists.")
         else:
             logging.info(f"Project '{PROJECT_NAME}' does not exist.")
             print(f"Project '{PROJECT_NAME}' does not exist.")
