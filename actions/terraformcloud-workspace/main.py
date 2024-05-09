@@ -19,7 +19,21 @@ class Context:
         tfc = TFC(API_TOKEN)
         tfc.set_org(ORG_NAME)
         ws_api = tfc.workspaces
-
+        # List existing Projects
+        prj_api = tfc.projects
+        existing_projects = prj_api.list(page=None, page_size=None, filters=None, query=None)
+        project_id = None
+        for prj in existing_projects["data"]:
+            if prj["attributes"]["name"] == PROJECT_NAME:
+                project_id = prj["id"]
+                break
+        project_exists = any(prj["attributes"]["name"] == PROJECT_NAME for prj in existing_projects["data"])
+        if project_exists:
+            logging.error(f"Project '{PROJECT_NAME}' already exists.")
+            print(f"Project '{PROJECT_NAME}' already exists.")
+        else:
+            logging.info(f"Project '{PROJECT_NAME}' does not exist.")
+            print(f"Project '{PROJECT_NAME}' does not exist.")
         # List existing workspaces
         existing_workspaces = ws_api.list(page=None, page_size=None, include=None, search=None, filters=None)
         workspace_exists = any(ws["attributes"]["name"] == WORKSPACE_NAME for ws in existing_workspaces["data"])
@@ -41,7 +55,7 @@ class Context:
                         "project": {
                             "data": {
                                 "type": "projects",
-                                "id": PROJECT_NAME
+                                "id": project_id
                             }
                         }
                     }
