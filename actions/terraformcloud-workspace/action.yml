@@ -1,0 +1,21 @@
+name: 'Terraform Workspace Creation Action'
+description: 'Use the Terraform Workspace Creation  on your workflow'
+inputs:
+  api_token:
+    description: 'API Token'
+    required: true
+  org_name:
+    description: 'ORG Name'
+    required: true  
+  workspace_name:
+    description: 'Workspace Name'
+    required: true
+  project_name:
+    description: 'Project name'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'sliders'
+  color: 'red'
