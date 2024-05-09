@@ -39,9 +39,6 @@ class Context:
         # List existing workspaces
         existing_workspaces = ws_api.list(page=None, page_size=None, include=None, search=None, filters=None)
         workspace_exists = any(ws["attributes"]["name"] == WORKSPACE_NAME for ws in existing_workspaces["data"])
-        print(workspace_exists)
-
-        # Extract workspace names
         if workspace_exists:
             logging.error(f"Workspace '{WORKSPACE_NAME}' already exists.")
             print(f"Workspace '{WORKSPACE_NAME}' already exists.")
