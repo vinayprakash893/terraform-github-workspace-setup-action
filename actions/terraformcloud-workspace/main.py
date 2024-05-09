@@ -65,7 +65,15 @@ class Context:
                 ]
             }
             list_varsets = vs_api.list_for_org()
-            print(list_varsets)
-            vs_api.apply_varset_to_workspace(VARIABLESET_NAME, ws_payload_id)
-            print(f"Variable Set mapping completed {VARIABLESET_NAME} for workspace {WORKSPACE_NAME} .")
+            variableset_id = None
+            for varset in list_varsets["data"]:
+                if varset["attributes"]["name"] == VARIABLESET_NAME:
+                    variableset_id = varset["id"]
+                    break
+            if variableset_id:
+                vs_api.apply_varset_to_workspace(variableset_id, ws_payload_id)
+                print(f"Variable Set mapping completed {VARIABLESET_NAME} for workspace {WORKSPACE_NAME}.")
+            else:
+                logging.error(f"Variable Set '{VARIABLESET_NAME}' not found.")
+                print(f"Variable Set '{VARIABLESET_NAME}' not found.")
 
