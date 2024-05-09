@@ -36,9 +36,16 @@ class Context:
                 }
             }
         }
-        ws_api.list(page=None, page_size=None, include=None, search=None, filters=None)
-        print(ws_api.list)
-        print("---vny---")
+        # List existing workspaces
+        existing_workspaces = ws_api.list()
+
+        # Extract workspace names
+        existing_workspace_names = [ws.name for ws in existing_workspaces]
+
+        if WORKSPACE_NAME in existing_workspace_names:
+            logging.error(f"Workspace {WORKSPACE_NAME} already exists.")
+            print(f"Workspace {WORKSPACE_NAME} already exists.")
+            return
         ws_api.create(ws_payload)
         logging.info(f"Workspace {WORKSPACE_NAME} has been created.")
         print(f"Workspace {WORKSPACE_NAME} has been created.")
