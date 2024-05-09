@@ -13,6 +13,9 @@ inputs:
   project_name:
     description: 'Project name'
     required: true
+  variableset_name:
+    description: 'Variable set name to map in the workspace'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'

@@ -15,6 +15,7 @@ class Context:
         ORG_NAME = self._environ.get('INPUT_ORG_NAME')
         WORKSPACE_NAME = self._environ.get('INPUT_WORKSPACE_NAME')
         PROJECT_NAME = self._environ.get('INPUT_PROJECT_NAME')
+        VARIABLESET_NAME = self._environ.get('INPUT_VARIABLESET_NAME')
         tfc = TFC(API_TOKEN)
         tfc.set_org(ORG_NAME)
         ws_api = tfc.workspaces
@@ -60,4 +61,4 @@ class Context:
                 }
             ]
         }
-        ws_api.apply_varset_to_workspace('varset-CfEeJ5NPqiebXaCg', ws_payload_id)
+        ws_api.apply_varset_to_workspace(VARIABLESET_NAME, ws_payload_id)
