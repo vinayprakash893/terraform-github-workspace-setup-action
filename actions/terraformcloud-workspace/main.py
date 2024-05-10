@@ -27,7 +27,7 @@ class Context:
                         "value": PROJECT_NAME
         }
         ]
-        existing_projects = prj_api.list_all(filters=None, query=None)
+        existing_projects = prj_api.list_all(filters=PROJECT_NAME, query=None)
         project_id = None
         for prj in existing_projects["data"]:
             if prj["attributes"]["name"] == PROJECT_NAME:
