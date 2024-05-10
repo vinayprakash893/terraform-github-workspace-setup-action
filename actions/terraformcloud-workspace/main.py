@@ -40,7 +40,13 @@ class Context:
             logging.info(f"Project '{PROJECT_NAME}' does not exist.")
             print(f"Project '{PROJECT_NAME}' does not exist.")
         # List existing workspaces
-        existing_workspaces = ws_api.list(page=None, page_size=None, include=None, search=None, filters=None)
+        workspace_filters = [
+        {
+                        "keys": ["Project", "id"], # ends up as ["workspace"]["name"]
+                        "value": project_id
+        }
+        ]
+        existing_workspaces = ws_api.list_all(search=None, include=None, filters=workspace_filters)
         workspace_exists = any(ws["attributes"]["name"] == WORKSPACE_NAME for ws in existing_workspaces["data"])
         if workspace_exists:
             logging.error(f"Workspace '{WORKSPACE_NAME}' already exists.")
