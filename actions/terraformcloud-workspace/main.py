@@ -21,7 +21,13 @@ class Context:
         ws_api = tfc.workspaces
         # List existing Projects
         prj_api = tfc.projects
-        existing_projects = prj_api.list(page=None, page_size=None, filters=None, query=None)
+        project_filters = [
+        {
+                        "keys": ["name"], # ends up as ["workspace"]["name"]
+                        "value": PROJECT_NAME
+        }
+        ]
+        existing_projects = prj_api.list(page=None, page_size=None, filters=None, query=project_filters)
         project_id = None
         for prj in existing_projects["data"]:
             if prj["attributes"]["name"] == PROJECT_NAME:
