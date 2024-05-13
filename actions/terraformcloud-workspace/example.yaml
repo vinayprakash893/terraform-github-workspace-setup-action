@@ -1,0 +1,23 @@
+name: Create Terraform Cloud Workspace
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform_cloud_workspace:
+    runs-on: ubuntu-latest
+    name: Create Terraform Cloud Workspace
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Create Terraform Cloud Workspace
+      uses: location/actions/terraformcloud-workspace@master
+      with:
+        org_name: 'ORG_name'
+        workspace_name: 'Workspace_Name'
+        project_name: 'Project_name'
+        variableset_name: 'Variable_set_name'
+        api_token: ${{ secrets.TF_API_TOKEN }}
