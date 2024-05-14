@@ -45,7 +45,7 @@ jobs:
 |org_name     | Yes       | `""`                      |   Name of the organization in Terraform Cloud.|
 |workspace_name     | Yes       | `""`                 |  Name of the workspace to be created.|
 |project_name     | Yes       | `""`                      |   Name of the project associated with the workspace.|
-|variableset_name     | Yes       | `""`                      |  Name of the variable set to be mapped in the workspace.|
+|variableset_name     | Optional       | `""`                      |  Name of the variable set to be mapped in the workspace.|
 
 
 # See also
