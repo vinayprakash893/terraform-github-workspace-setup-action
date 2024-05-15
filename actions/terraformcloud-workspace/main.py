@@ -150,6 +150,7 @@ class Context:
 
             if not var_set_id:
                 logging.error(f"TFC variable set not found: {var_set_name}")
+                raise Exception()
 
             logging.info(f"var_sets: {json.dumps(var_sets)}")
 
