@@ -15,7 +15,8 @@ inputs:
     required: true
   variableset_name:
     description: 'Variable set name to map in the workspace'
-    required: true
+    required: false
+    default: ""
 runs:
   using: 'docker'
   image: 'Dockerfile'

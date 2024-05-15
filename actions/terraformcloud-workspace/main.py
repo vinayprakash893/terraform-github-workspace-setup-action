@@ -112,7 +112,7 @@ class Context:
                 }
                 }
             })['data']
-            logging.info(f"workspace: {json.dumps(workspace)}")
+            # logging.info(f"workspace: {json.dumps(workspace)}")
             
             return workspace
 
@@ -150,7 +150,7 @@ class Context:
             if not var_set_id:
                 logging.error(f"TFC variable set not found: {var_set_name}")
 
-            logging.info(f"var_sets: {json.dumps(var_sets)}")
+            # logging.info(f"var_sets: {json.dumps(var_sets)}")
 
             return var_set_id
 
