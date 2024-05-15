@@ -112,7 +112,7 @@ class Context:
                 }
                 }
             })['data']
-            logging.info(f"workspace: {json.dumps(workspace)}")
+            # logging.info(f"workspace: {json.dumps(workspace)}")
             
             return workspace
 
