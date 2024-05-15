@@ -34,7 +34,9 @@ class Context:
             var_set_id = self._get_tfc_var_set_id(tfc, VARIABLESET_NAME)
 
             # Apply the Terraform Cloud variable set to the workspace
-            self._apply_var_set_to_tfc_workspace(tfc, var_set_id, workspace['id'])      
+            self._apply_var_set_to_tfc_workspace(tfc, var_set_id, workspace['id'])
+        else:
+            logging.info(f"No Variable Set Mapping requested")
 
     def _get_tfc_project_id(self, TFC, project_name):
         try:
