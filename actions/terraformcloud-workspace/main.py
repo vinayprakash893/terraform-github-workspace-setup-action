@@ -50,7 +50,7 @@ class Context:
             if not project:
                 logging.error(f"TFC project not found: {project_name}")
 
-            logging.info(f"project: {json.dumps(project)}")
+            # logging.info(f"project: {json.dumps(project)}")
 
             project_id = None
             for prj in project:
@@ -79,7 +79,7 @@ class Context:
             if not workspace:
                 logging.error(f"TFC workspace not found: {workspace_name}")
 
-            logging.info(f"workspace: {json.dumps(workspace)}")
+            # logging.info(f"workspace: {json.dumps(workspace)}")
             for ws in workspace:
                 if ws["attributes"]["name"] == workspace_name:
                     workspace = ws
@@ -112,7 +112,7 @@ class Context:
                 }
                 }
             })['data']
-            # logging.info(f"workspace: {json.dumps(workspace)}")
+            logging.info(f"workspace: {json.dumps(workspace)}")
             
             return workspace
 
