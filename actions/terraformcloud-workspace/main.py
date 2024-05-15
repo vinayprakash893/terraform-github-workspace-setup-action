@@ -49,8 +49,9 @@ class Context:
 
             if not project:
                 logging.error(f"TFC project not found: {project_name}")
+                raise Exception()
 
-            # logging.info(f"project: {json.dumps(project)}")
+            logging.info(f"project: {json.dumps(project)}")
 
             project_id = None
             for prj in project:
@@ -79,7 +80,7 @@ class Context:
             if not workspace:
                 logging.error(f"TFC workspace not found: {workspace_name}")
 
-            # logging.info(f"workspace: {json.dumps(workspace)}")
+            logging.info(f"workspace: {json.dumps(workspace)}")
             for ws in workspace:
                 if ws["attributes"]["name"] == workspace_name:
                     workspace = ws
@@ -150,7 +151,7 @@ class Context:
             if not var_set_id:
                 logging.error(f"TFC variable set not found: {var_set_name}")
 
-            # logging.info(f"var_sets: {json.dumps(var_sets)}")
+            logging.info(f"var_sets: {json.dumps(var_sets)}")
 
             return var_set_id
 
