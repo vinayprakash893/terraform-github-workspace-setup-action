@@ -102,7 +102,8 @@ class Context:
                 'type': 'workspaces',
                 'attributes': {
                     'auto-apply': 'false',
-                    'name': workspace_name
+                    'name': workspace_name,
+                    'terraform-version': '1.8.2'
                 },
                 'relationships': {
                     'project': {
@@ -114,7 +115,7 @@ class Context:
                 }
                 }
             })['data']
-            # logging.info(f"workspace: {json.dumps(workspace)}")
+            logging.info(f"workspace: {json.dumps(workspace)}")
             
             return workspace
 
