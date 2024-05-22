@@ -104,8 +104,7 @@ class Context:
                 'type': 'workspaces',
                 'attributes': {
                     'auto-apply': 'false',
-                    'name': workspace_name,
-                    'terraform-version': VERSION
+                    'name': workspace_name
                 },
                 'relationships': {
                     'project': {
