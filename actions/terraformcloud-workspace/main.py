@@ -88,8 +88,7 @@ class Context:
                     workspace = ws
                     logging.info(f"TFC workspace found: {workspace_name}")
                     break
-
-            return workspace
+                return workspace
 
         except Exception as e:
             logging.error(f"Failed to get TFC workspace: {str(e)}")
