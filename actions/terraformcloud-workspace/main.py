@@ -78,7 +78,7 @@ class Context:
                 'value': workspace_name
                 }]
             ).get('data', None)
-            # logging.info(f"workspace: {json.dumps(workspace)}")
+            logging.info(f"all workspaces: {json.dumps(workspace)}")
 
             if not workspaces:
                 logging.error(f"TFC workspace not found: {workspace_name}")
@@ -88,6 +88,7 @@ class Context:
             for ws in workspaces:
                 if ws["attributes"]["name"] == workspace_name:
                     workspace = ws
+                    logging.info(f"TFC workspace found: {workspace_name}")
                     break
 
             return workspace
@@ -118,7 +119,7 @@ class Context:
                 }
                 }
             })['data']
-            logging.info(f"workspace: {json.dumps(workspace)}")
+            logging.info(f"workspace created: {json.dumps(workspace)}")
             
             return workspace
 
