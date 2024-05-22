@@ -80,9 +80,6 @@ class Context:
             ).get('data', None)
             logging.info(f"all workspaces: {json.dumps(workspace)}")
 
-            if not workspace:
-                logging.error(f"TFC workspace not found: {workspace_name}")
-
             for ws in workspace:
                 logging.info(f"starting for loop workspace")
                 if ws["attributes"]["name"] == workspace_name:
@@ -90,7 +87,8 @@ class Context:
                     logging.info(f"TFC workspace found: {workspace_name}")
                     break
                 return workspace
-            raise
+            logging.info(f"sopping for loop workspace")
+            return None
 
         except Exception as e:
             logging.error(f"Failed to get TFC workspace: {str(e)}")
