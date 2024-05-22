@@ -49,7 +49,7 @@ class Context:
                     'value': project_name
                 }]
             ).get('data', None)
-            logging.info(f"project: {json.dumps(project)}")
+            #logging.info(f"project: {json.dumps(project)}")
 
             if not project:
                 logging.error(f"TFC project not found: {project_name}")
@@ -116,7 +116,7 @@ class Context:
                 }
                 }
             })['data']
-            logging.info(f"workspace: {json.dumps(workspace)}")
+            # logging.info(f"workspace: {json.dumps(workspace)}")
             logging.info(f"Workspace Created: {workspace_name}")
             return workspace
 
