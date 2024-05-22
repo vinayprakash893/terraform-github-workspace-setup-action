@@ -113,7 +113,7 @@ class Context:
                     }
                 }
                 }
-            })['data']
+            }),{'data'}
             logging.info(f"workspace: {json.dumps(workspace)}")
             
             return workspace
