@@ -95,7 +95,7 @@ class Context:
             logging.error(f"Failed to get TFC workspace: {str(e)}")
             raise
 
-    def _create_TFC_workspace(self, TFC, project_id, workspace_name):
+    def _create_TFC_workspace(self, TFC, project_id, workspace_name,VERSION):
         logging.info(f"Creating TFC workspace: {workspace_name}")
 
         try:
@@ -104,7 +104,8 @@ class Context:
                 'type': 'workspaces',
                 'attributes': {
                     'auto-apply': 'false',
-                    'name': workspace_name
+                    'name': workspace_name,
+                    "terraform-version": VERSION
                 },
                 'relationships': {
                     'project': {
