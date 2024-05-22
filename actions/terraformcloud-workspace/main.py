@@ -81,12 +81,10 @@ class Context:
             logging.info(f"all workspaces: {json.dumps(workspace)}")
 
             for ws in workspace:
-                logging.info(f"starting for loop workspace")
                 if ws["attributes"]["name"] == workspace_name:
                     workspace = ws
                     logging.info(f"TFC workspace found: {workspace_name}")
                     return ws
-            logging.info(f"stopping for loop workspace")
             return None
 
         except Exception as e:
@@ -131,7 +129,6 @@ class Context:
         workspace = None
 
         workspace = self._get_tfc_workspace(TFC, project_id,workspace_name)
-        logging.info(f"came out of workspace get")
         # If workspace not found, create a new workspace
         if not workspace: 
             workspace = self._create_TFC_workspace(TFC, project_id, workspace_name,version)
