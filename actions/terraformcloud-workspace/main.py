@@ -74,7 +74,7 @@ class Context:
 
             workspaces = TFC.workspaces.list_all(
                 filters=[{
-                'keys': ['workspace', 'name'],
+                'keys': ['workspaces', 'name'],
                 'value': workspace_name
                 }]
             ).get('data', None)
