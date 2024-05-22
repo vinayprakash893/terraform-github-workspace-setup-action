@@ -78,7 +78,7 @@ class Context:
                 'value': workspace_name
                 }]
             ).get('data', None)
-            logging.info(f"workspace: {json.dumps(workspace)}")
+            # logging.info(f"workspace: {json.dumps(workspace)}")
 
             if not workspace:
                 logging.error(f"TFC workspace not found: {workspace_name}")
@@ -86,6 +86,7 @@ class Context:
             for ws in workspace:
                 if ws["attributes"]["name"] == workspace_name:
                     workspace = ws
+                    logging.info(f"TFC workspace found: {workspace_name}")
                     break
 
             return workspace
@@ -136,7 +137,7 @@ class Context:
         if not workspace: 
             workspace = self._create_TFC_workspace(TFC, project_id, workspace_name,VERSION)
             logging.info('Workspace not found, creating new workspace')
-
+        logging.info('Workspace found, No need to create new workspace')
         return workspace
 
 
