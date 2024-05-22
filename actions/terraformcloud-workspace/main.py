@@ -19,6 +19,7 @@ class Context:
         WORKSPACE_NAME = self._environ.get('INPUT_WORKSPACE_NAME')
         PROJECT_NAME = self._environ.get('INPUT_PROJECT_NAME')
         VARIABLESET_NAME = self._environ.get('INPUT_VARIABLESET_NAME')
+        VERSION = self._environ.get('INPUT_VERSION')
         tfc = TFC(API_TOKEN)
         tfc.set_org(ORG_NAME)
 
@@ -26,7 +27,7 @@ class Context:
         project_id = self._get_tfc_project_id(tfc, PROJECT_NAME)
 
         #find or create the TFC workspace
-        workspace = self._find_tfc_workspace(tfc, project_id, WORKSPACE_NAME)
+        workspace = self._find_tfc_workspace(tfc, project_id, WORKSPACE_NAME,VERSION)
 
         #check variable set is null or not
         if VARIABLESET_NAME:
@@ -77,7 +78,7 @@ class Context:
                 'value': workspace_name
                 }]
             ).get('data', None)
-            # logging.info(f"workspace: {json.dumps(workspace)}")
+            logging.info(f"workspace: {json.dumps(workspace)}")
 
             if not workspace:
                 logging.error(f"TFC workspace not found: {workspace_name}")
@@ -102,7 +103,8 @@ class Context:
                 'type': 'workspaces',
                 'attributes': {
                     'auto-apply': 'false',
-                    'name': workspace_name
+                    'name': workspace_name,
+                    'terraform-version': VERSION
                 },
                 'relationships': {
                     'project': {
@@ -124,7 +126,7 @@ class Context:
             raise
 
 
-    def _find_tfc_workspace(self, TFC, project_id, workspace_name):
+    def _find_tfc_workspace(self, TFC, project_id, workspace_name,VERSION):
         logging.info('Checking if tfc workspace already exists')
 
         workspace = None
@@ -132,7 +134,7 @@ class Context:
         workspace = self._get_tfc_workspace(TFC, workspace_name)
         # If workspace not found, create a new workspace
         if not workspace: 
-            workspace = self._create_TFC_workspace(TFC, project_id, workspace_name)
+            workspace = self._create_TFC_workspace(TFC, project_id, workspace_name,VERSION)
             logging.info('Workspace not found, creating new workspace')
 
         return workspace
