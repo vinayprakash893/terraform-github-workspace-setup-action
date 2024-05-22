@@ -95,7 +95,7 @@ class Context:
             logging.error(f"Failed to get TFC workspace: {str(e)}")
             raise
 
-    def _create_TFC_workspace(self, TFC, project_id, workspace_name,VERSION):
+    def _create_TFC_workspace(self, TFC, project_id, workspace_name,version):
         logging.info(f"Creating TFC workspace: {workspace_name}")
 
         try:
