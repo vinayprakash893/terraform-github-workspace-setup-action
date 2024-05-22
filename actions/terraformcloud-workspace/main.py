@@ -68,14 +68,14 @@ class Context:
             raise
 
 
-    def _get_tfc_workspace(self, TFC, workspace_name):
+    def _get_tfc_workspace(self, TFC, project_id, workspace_name,):
         try:
             logging.info(f"Getting TFC workspace: {workspace_name}")
 
             workspace = TFC.workspaces.list_all(
                 filters=[{
-                'keys': ['workspace', 'name'],
-                'value': workspace_name
+                'keys': ['project', 'id'],
+                'value': project_id
                 }]
             ).get('data', None)
             logging.info(f"workspace: {json.dumps(workspace)}")
@@ -131,7 +131,7 @@ class Context:
 
         workspace = None
 
-        workspace = self._get_tfc_workspace(TFC, workspace_name)
+        workspace = self._get_tfc_workspace(TFC, project_id,workspace_name)
         # If workspace not found, create a new workspace
         if not workspace: 
             workspace = self._create_TFC_workspace(TFC, project_id, workspace_name,VERSION)
