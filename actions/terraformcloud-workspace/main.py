@@ -78,7 +78,7 @@ class Context:
                 'value': workspace_name
                 }]
             ).get('data', None)
-            logging.info(f"all workspaces: {json.dumps(workspace)}")
+            logging.info(f"all workspaces: {json.dumps(workspaces)}")
 
             if not workspaces:
                 logging.error(f"TFC workspace not found: {workspace_name}")
