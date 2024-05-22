@@ -78,7 +78,7 @@ class Context:
                 'value': project_id
                 }]
             ).get('data', None)
-            logging.info(f"workspace: {json.dumps(workspace)}")
+            logging.info(f"all workspaces: {json.dumps(workspace)}")
 
             if not workspace:
                 logging.error(f"TFC workspace not found: {workspace_name}")
@@ -105,7 +105,7 @@ class Context:
                 'attributes': {
                     'auto-apply': 'false',
                     'name': workspace_name,
-                    "terraform-version": VERSION
+                    'terraform-version': version
                 },
                 'relationships': {
                     'project': {
@@ -127,7 +127,7 @@ class Context:
             raise
 
 
-    def _find_tfc_workspace(self, TFC, project_id, workspace_name,VERSION):
+    def _find_tfc_workspace(self, TFC, project_id, workspace_name,version):
         logging.info('Checking if tfc workspace already exists')
 
         workspace = None
@@ -135,7 +135,7 @@ class Context:
         workspace = self._get_tfc_workspace(TFC, project_id,workspace_name)
         # If workspace not found, create a new workspace
         if not workspace: 
-            workspace = self._create_TFC_workspace(TFC, project_id, workspace_name,VERSION)
+            workspace = self._create_TFC_workspace(TFC, project_id, workspace_name,version)
             logging.info('Workspace not found, created new workspace')
         return workspace
 
