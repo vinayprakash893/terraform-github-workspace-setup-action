@@ -136,9 +136,9 @@ class Context:
 
         workspace = self._get_tfc_workspace(TFC, workspace_name)
         # If workspace not found, create a new workspace
-        if not workspace: 
-            workspace = self._create_TFC_workspace(TFC, project_id, workspace_name,version)
+        if not workspace:
             logging.info('Workspace not found, creating new workspace')
+            workspace = self._create_TFC_workspace(TFC, project_id, workspace_name,version)        
 
         return workspace
 
