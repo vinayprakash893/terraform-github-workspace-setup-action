@@ -101,7 +101,7 @@ class Context:
                 'data': {
                 'type': 'workspaces',
                 'attributes': {
-                    'auto-apply': 'false',
+                    'auto-apply': False,
                     'name': workspace_name
                 },
                 'relationships': {
@@ -113,7 +113,7 @@ class Context:
                     }
                 }
                 }
-            }),{'data'}
+            })['data']
             logging.info(f"workspace: {json.dumps(workspace)}")
             
             return workspace
