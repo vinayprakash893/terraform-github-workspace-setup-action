@@ -19,6 +19,7 @@ class Context:
         WORKSPACE_NAME = self._environ.get('INPUT_WORKSPACE_NAME')
         PROJECT_NAME = self._environ.get('INPUT_PROJECT_NAME')
         VARIABLESET_NAME = self._environ.get('INPUT_VARIABLESET_NAME')
+        VERSION = self._environ.get('INPUT_VERSION')
         tfc = TFC(API_TOKEN)
         tfc.set_org(ORG_NAME)
 
@@ -26,7 +27,7 @@ class Context:
         project_id = self._get_tfc_project_id(tfc, PROJECT_NAME)
 
         #find or create the TFC workspace
-        workspace = self._find_tfc_workspace(tfc, project_id, WORKSPACE_NAME)
+        workspace = self._find_tfc_workspace(tfc, project_id, WORKSPACE_NAME,VERSION)
 
         #check variable set is null or not
         if VARIABLESET_NAME:
@@ -48,7 +49,7 @@ class Context:
                     'value': project_name
                 }]
             ).get('data', None)
-            logging.info(f"project: {json.dumps(project)}")
+            #logging.info(f"project: {json.dumps(project)}")
 
             if not project:
                 logging.error(f"TFC project not found: {project_name}")
@@ -85,6 +86,7 @@ class Context:
             for ws in workspace:
                 if ws["attributes"]["name"] == workspace_name:
                     workspace = ws
+                    logging.info(f"TFC workspace found: {workspace_name}")
                     break
 
             return workspace
@@ -101,7 +103,7 @@ class Context:
                 'data': {
                 'type': 'workspaces',
                 'attributes': {
-                    'auto-apply': False,
+                    'auto-apply': 'false',
                     'name': workspace_name
                 },
                 'relationships': {
@@ -114,8 +116,8 @@ class Context:
                 }
                 }
             })['data']
-            logging.info(f"workspace: {json.dumps(workspace)}")
-            
+            # logging.info(f"workspace: {json.dumps(workspace)}")
+            logging.info(f"Workspace Created: {workspace_name}")
             return workspace
 
         except Exception as e:
@@ -124,7 +126,7 @@ class Context:
             raise
 
 
-    def _find_tfc_workspace(self, TFC, project_id, workspace_name):
+    def _find_tfc_workspace(self, TFC, project_id, workspace_name,VERSION):
         logging.info('Checking if tfc workspace already exists')
 
         workspace = None
@@ -132,9 +134,9 @@ class Context:
         workspace = self._get_tfc_workspace(TFC, workspace_name)
         # If workspace not found, create a new workspace
         if not workspace: 
-            workspace = self._create_TFC_workspace(TFC, project_id, workspace_name)
-            logging.info('Workspace not found, creating new workspace')
-
+            workspace = self._create_TFC_workspace(TFC, project_id, workspace_name,VERSION)
+            logging.info('Workspace not found, created new workspace')
+        logging.info('Workspace found, No need to create new workspace')
         return workspace
 
 
